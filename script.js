@@ -1,12 +1,12 @@
 const parent = document.querySelector("#container");
 const parentWidth = 500;
 parent.style.width = `${parentWidth}px`;
-const square = 3;
-const squareWidth = (parentWidth - (square * 3)) / square;
+const childAmount = 3;
+const squareWidth = (parentWidth - (childAmount* 2)) / childAmount;
 
 
-for (let i = 0; i < square; i++) {
-    for (let j = 0; j < square; j++) {
+for (let i = 0; i < childAmount; i++) {
+    for (let j = 0; j < childAmount; j++) {
         newSquare();
     }
 
@@ -20,3 +20,12 @@ function newSquare() {
     child.style.border = '1px solid black';
     parent.appendChild(child);   
 }
+
+const nodeList = document.querySelectorAll(".square");
+
+let onHover = () => {
+    console.log('hoover');
+}
+
+nodeList.forEach((item) => item.addEventListener("mouseenter", onHover));
+

@@ -2,7 +2,7 @@ const parent = document.querySelector("#container");
 const parentWidth = 600;
 parent.style.width = `${parentWidth}px`;
 const button = document.querySelector("#input")
-const squares = document.querySelectorAll(".square");
+console.log(button);
 
 let childAmount = 16;
 
@@ -15,8 +15,14 @@ function newGrid(childAmount) {
 }
 
 button.addEventListener("click", () => {
+    clearGrid();
     let input = prompt("Enter the grid size, up to 100");
-    newGrid(input);
+    if (input <= 100) {
+        newGrid(input);
+    } else {
+        alert("I said 100");
+        newGrid(100);
+    }
 });
 
 function newSquare(childAmount) {
@@ -27,15 +33,19 @@ function newSquare(childAmount) {
     child.style.width = `${squareWidth}px`;
     child.style.border = '1px solid black';
     parent.appendChild(child);
+    sketch();
 }
 
-const nodeList = document.querySelectorAll(".square");
-
-nodeList.forEach((item) => item.addEventListener("mouseenter", () => item.style.backgroundColor = 'black'));
+function sketch() {
+    const squares = document.querySelectorAll(".square");
+    
+    squares.forEach((item) => item.addEventListener("mouseenter", () => item.style.backgroundColor = 'black'));
+}
 
 newGrid(16);
 
-// function clearGrid() {
-
-
-// }
+function clearGrid() {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}

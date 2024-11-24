@@ -5,7 +5,7 @@ const button = document.querySelector("#input");
 const black = document.querySelector("#black");
 const erase = document.querySelector("#erase");
 const random = document.querySelector("#random");
-const gradient = document.querySelector("#gradient");
+// const gradient = document.querySelector("#gradient");
 
 let childAmount = 16;
 
@@ -23,7 +23,6 @@ button.addEventListener("click", () => {
     if (input <= 100) {
         newGrid(input);
     } else {
-        alert("I said 100");
         newGrid(100);
     }
 });
@@ -38,43 +37,53 @@ function newSquare(childAmount) {
     parent.appendChild(child);
     pointerBlack();
 }
-// here
 
 black.addEventListener("click", () => pointerBlack());
 erase.addEventListener("click", () => pointerErase());
 random.addEventListener("click", () => pointerRandom());
-gradient.addEventListener("click", () => pointerGradient());
+// gradient.addEventListener("click", () => pointerGradient());
 
 function pointerBlack() {
     const squares = document.querySelectorAll(".square");
     squares.forEach((item) => item.addEventListener("mouseenter", () => {
-        item.style.backgroundColor = 'black';
-        item.style.opacity = '1';
+        itemStyles(item, 'gradient', 'black', 1);
     }));
 }
 
 function pointerErase() {
     const squares = document.querySelectorAll(".square");
     squares.forEach((item) => item.addEventListener("mouseenter", () => {
-        item.style.backgroundColor = 'white';
-        item.style.opacity = '1';
+        itemStyles(item, 'gradient', 'white', 1);
     }));
 }
 
 function pointerRandom() {
     const squares = document.querySelectorAll(".square");
     squares.forEach((item) => item.addEventListener("mouseenter", () => {
-        item.style.backgroundColor = `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`;
-        item.style.opacity = '1';
+        itemStyles(item, 'gradient', `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`, 1)
     }));
 }
 
-function pointerGradient() {
-    const squares = document.querySelectorAll(".square");
-    squares.forEach((item) => item.addEventListener("mouseenter", () => {
-        
-    }));
-}
+// function pointerGradient() {
+//     const squares = document.querySelectorAll(".square");
+//     squares.forEach((item) => item.addEventListener("mouseenter", () => {
+//         gradientCheck(item);
+//         // console.log(item.classList.contains('gradient'));
+//         // console.log(item.classList);
+//         // if (item.classList.contains('gradient')) {
+//         //     console.log(item.classList, 'yea');
+//         //     item.classList = 'square gradient';
+            
+//         // //     console.log('grady');
+//         // } else {
+//         //     console.log(item.classList, 'no');
+//         // }
+
+//         // item.classList = 'square gradient';
+
+//     }));
+// }
+
 newGrid(16);
 
 function clearGrid() {
@@ -87,3 +96,19 @@ function randomNumber() {
     return Math.floor(Math.random() * 256)
 }
 
+function itemStyles(item, removeGradient, bgColor, opacity) {
+    item.classList.remove(removeGradient);
+    item.style.backgroundColor = bgColor;
+    item.style.opacity = opacity;
+
+}
+
+// function gradientCheck() {
+//     if (item.classList.contains("gradient")) {
+//         console.log('no-grade');
+//         item.classList = 'square gradient';
+//         console.log('post', item.classList);
+//     } else {
+//         console.log('ok');
+//     }
+// }
